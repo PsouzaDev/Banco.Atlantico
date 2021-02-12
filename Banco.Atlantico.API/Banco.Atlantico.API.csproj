@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="..\Banco.Atlantico\Banco.Atlantico.Infra.IoC.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.4" />
+	  <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.0.4" />
+	  <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Banco.Atlantico.Application\Banco.Atlantico.Application.csproj" />
+	  <ProjectReference Include="..\Banco.Atlantico.Infra.IoC\Banco.Atlantico.Infra.IoC.csproj" />
+	</ItemGroup>
+
+
+</Project>

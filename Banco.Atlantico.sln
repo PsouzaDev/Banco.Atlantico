@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DA11C348-B093-4B65-8B29-137439F763C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Services", "1 - Services", "{73A4801A-A2A4-4802-9C08-57C9E8006C05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{CCA595FD-81D1-4681-966D-96F46999AC34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{28C6CA54-3743-438D-A088-31CABD027CB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{7855B075-E4FB-42CF-A185-D07922A417EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{DC74F2DD-B7E8-4078-A425-F1BB59146A52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Shared", "6 - Shared", "{93F1BF94-420D-4326-BFC1-50A7444CDE53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banco.Atlantico.API", "Banco.Atlantico.API\Banco.Atlantico.API.csproj", "{4A37DD95-6D00-4754-8293-207E7B548744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banco.Atlantico.Application", "Banco.Atlantico.Application\Banco.Atlantico.Application.csproj", "{EC78249B-1D7E-479F-96E3-8017A81187F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banco.Atlantico.Infra.IoC", "Banco.Atlantico.Infra.IoC\Banco.Atlantico.Infra.IoC.csproj", "{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A37DD95-6D00-4754-8293-207E7B548744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A37DD95-6D00-4754-8293-207E7B548744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A37DD95-6D00-4754-8293-207E7B548744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A37DD95-6D00-4754-8293-207E7B548744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC78249B-1D7E-479F-96E3-8017A81187F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC78249B-1D7E-479F-96E3-8017A81187F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC78249B-1D7E-479F-96E3-8017A81187F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC78249B-1D7E-479F-96E3-8017A81187F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{73A4801A-A2A4-4802-9C08-57C9E8006C05} = {DA11C348-B093-4B65-8B29-137439F763C1}
+		{CCA595FD-81D1-4681-966D-96F46999AC34} = {DA11C348-B093-4B65-8B29-137439F763C1}
+		{28C6CA54-3743-438D-A088-31CABD027CB7} = {DA11C348-B093-4B65-8B29-137439F763C1}
+		{7855B075-E4FB-42CF-A185-D07922A417EB} = {DA11C348-B093-4B65-8B29-137439F763C1}
+		{DC74F2DD-B7E8-4078-A425-F1BB59146A52} = {DA11C348-B093-4B65-8B29-137439F763C1}
+		{93F1BF94-420D-4326-BFC1-50A7444CDE53} = {DA11C348-B093-4B65-8B29-137439F763C1}
+		{4A37DD95-6D00-4754-8293-207E7B548744} = {73A4801A-A2A4-4802-9C08-57C9E8006C05}
+		{EC78249B-1D7E-479F-96E3-8017A81187F5} = {CCA595FD-81D1-4681-966D-96F46999AC34}
+		{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A} = {7855B075-E4FB-42CF-A185-D07922A417EB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0ACF0303-704D-465D-A493-1ECE9306D85C}
+	EndGlobalSection
+EndGlobal
