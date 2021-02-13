@@ -31,9 +31,17 @@ namespace Banco.Atlantico.API.Controllers
             _saqueService = saqueService ?? throw  new ArgumentNullException(nameof(saqueService));
         }
 
-
+        /// <summary>
+        /// Realiza um Saque no caixa escolhido.
+        /// </summary>
+        /// <param name="saqueViewModel"></param>
+        /// <returns></returns>
         [HttpPost()]
         [Consumes("application/json")]
+        [SwaggerResponse(200, "sucesso!", typeof(SaqueViewModel))]
+        [SwaggerResponse(204, "nada encontrado!")]
+        [SwaggerResponse(400, "Parametros inválidos!")]
+        [SwaggerResponse(500, "Erro interno!")]
         public async Task<IActionResult> SaqueAsync(SaqueViewModel saqueViewModel)
         {
             _stopWatch.Start();
