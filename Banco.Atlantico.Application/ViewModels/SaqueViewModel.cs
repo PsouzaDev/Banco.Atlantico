@@ -10,11 +10,11 @@ namespace Banco.Atlantico.Application.ViewModels
     {
         [Required]
         [JsonProperty("Valor")]
-        public int Valor { get; set; }
+        public decimal Valor { get; set; }
         [Required]
         [JsonProperty("IdCaixa")]
         public string IdCaixa { get; set; }
-        [JsonProperty("Cliente")]
-        public ClienteViewModel Cliente { get; set; }
+        [JsonProperty("ClienteId")]
+        public string ClienteId { get; set; }
     }
 }

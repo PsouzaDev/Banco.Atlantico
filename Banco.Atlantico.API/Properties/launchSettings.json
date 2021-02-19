@@ -30,10 +30,11 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "AES_SECRET": "BANCO#ATLANTICO",
+        "AES_SECRET": "BANCO@ATLANTICO#dev2021",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "VALOR_MINIMO": "0",
-        "VALOR_MAXIMO": "10000"
+        "VALOR_MAXIMO": "10000",
+        "Connection_String": "Server=(LocalDB)\\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\\Users\\pedro\\source\\repos\\Banco.Atlantico\\Banco.Atlantico.Infra\\Data\\BancoAtlantico.mdf"
       }
     }
   }

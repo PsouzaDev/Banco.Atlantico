@@ -6,7 +6,7 @@ namespace Banco.Atlantico.Domain
 {
     public interface IBuilder<out T>
     {
-        T Sacar();
+        T Select();
         IQueryBuilder Builder();
     }
 }

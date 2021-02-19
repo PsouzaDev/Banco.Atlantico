@@ -1,12 +1,16 @@
-﻿using Banco.Atlantico.Domain.Models.Builder;
+﻿using Banco.Atlantico.Domain.Models;
+using Banco.Atlantico.Domain.Models.Builder;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Banco.Atlantico.Domain.Interfaces.Builder
 {
-    public interface IQuerySaqueBuilder : IBuilder<QuerySaqueBuilder>
+    public interface IQuerySaquesBuilder : IBuilder<QuerySaquesBuilder>
     {
-        QuerySaqueBuilder SacarFrom();
+        QuerySaquesBuilder SacarFrom();
+        QuerySaquesBuilder Update();
+        QuerySaquesBuilder Sets(Caixa caixa);
+        QuerySaquesBuilder WheresUpdates(Caixa caixa);
     }
 }

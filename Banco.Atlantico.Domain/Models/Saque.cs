@@ -7,9 +7,8 @@ namespace Banco.Atlantico.Domain.Models
     public class Saque
     {
         
-        public int Valor { get; set; }
-        
+        public decimal Valor { get; set; }
         public string IdCaixa { get; set; }
-        public Cliente Cliente { get; set; }
+        public string ClienteId { get; set; }
     }
 }

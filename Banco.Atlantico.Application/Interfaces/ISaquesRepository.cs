@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Banco.Atlantico.Application.Interfaces
 {
-    public interface ISaqueRepository
+    public interface ISaquesRepository
     {
-        Task<IEnumerable<ReciboSaque>> SaqueAsync(Saque saqueDomain, string _correlationId);
+        Task<IEnumerable<ReciboSaque>> SaqueAsync(Saque saqueDomain, Caixa caixa, string _correlationId);
     }
 }

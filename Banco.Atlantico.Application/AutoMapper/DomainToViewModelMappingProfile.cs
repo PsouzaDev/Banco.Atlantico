@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Banco.Atlantico.Application.ViewModels;
+using Banco.Atlantico.Domain.Models;
 
 namespace Banco.Atlantico.Application
 {
@@ -6,6 +8,7 @@ namespace Banco.Atlantico.Application
     {
         public DomainToViewModelMappingProfile()
         {
+            CreateMap<Caixa, CaixaViewModel>();
         }
     }
 }

@@ -12,27 +12,28 @@ using System.Threading.Tasks;
 
 namespace Banco.Atlantico.Infra.Repository
 {
-    public class SaqueRepository : ISaqueRepository
+    public class SaquesRepository : ISaquesRepository
     {
-        private readonly IQuerySaqueBuilder _querySaqueBuilder;
+        private readonly string ConnectionString = Environment.GetEnvironmentVariable("Connection_String");
+        private readonly IQuerySaquesBuilder _querySaqueBuilder;
 
-        public SaqueRepository(IQuerySaqueBuilder querySaqueBuilder)
+        public SaquesRepository(IQuerySaquesBuilder querySaqueBuilder)
         {
             _querySaqueBuilder = querySaqueBuilder ?? throw new ArgumentNullException(nameof(querySaqueBuilder));
         }
 
-        public async Task<IEnumerable<ReciboSaque>> SaqueAsync(Saque saqueDomain, string _correlationId)
+        public async Task<IEnumerable<ReciboSaque>> SaqueAsync(Saque saqueDomain, Caixa caixa, string _correlationId)
         {
-            var Query = _querySaqueBuilder.Sacar().SacarFrom().Builder();
+            var Query = _querySaqueBuilder.Update().Sets(caixa).WheresUpdates(caixa).Builder();
 
-            using (var con = new SqlConnection("temp"))
+            using (var con = new SqlConnection(ConnectionString))
             {
-                var Recibo = await con.QueryAsync<ReciboSaque>(sql: Query.Sql.ToString(),
+                var Recibo = await con.ExecuteAsync(sql: Query.Sql.ToString(),
                                                                     param: Query.Parameters,
                                                                     commandTimeout: 140,
                                                                     commandType: CommandType.Text);
 
-                return Recibo.ToList();
+                throw new NotImplementedException();
             }
 
         }

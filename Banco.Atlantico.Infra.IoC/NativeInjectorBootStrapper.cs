@@ -19,16 +19,19 @@ namespace Banco.Atlantico.Infra.IoC
             //###########################################################
             //===================== Services ============================
             //###########################################################
-            services.AddScoped<ISaqueService, SaqueService>();
+            services.AddScoped<ISaquesService, SaquesService>();
+            services.AddScoped<ICaixasService, CaixasService>();
 
             services.AddTransient<IQueryBuilder, QueryBuilder>();
-            services.AddTransient<IQuerySaqueBuilder, QuerySaqueBuilder>();
+            services.AddTransient<IQuerySaquesBuilder, QuerySaquesBuilder>();
+            services.AddTransient<IQueryCaixasBuilder, QueryCaixasBuilder>();
 
 
             //###########################################################
             //==================== Repository ===========================
             //###########################################################
-            services.AddScoped<ISaqueRepository, SaqueRepository>();
+            services.AddScoped<ISaquesRepository, SaquesRepository>();
+            services.AddScoped<ICaixasRepository, CaixasRepository>();
 
             //#############################################################
             //========================   Context  =========================

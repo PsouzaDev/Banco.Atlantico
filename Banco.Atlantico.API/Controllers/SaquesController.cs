@@ -16,19 +16,19 @@ namespace Banco.Atlantico.API.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class CaixaController : Controller
+    public class SaquesController : Controller
     {
         private readonly Stopwatch _stopWatch;
-        private readonly ISaqueService _saqueService;
+        private readonly ISaquesService _saquesService;
         private readonly int VALORMINIMO = int.Parse( Environment.GetEnvironmentVariable("VALOR_MINIMO"));
         private readonly int VALORMAXIMO = int.Parse( Environment.GetEnvironmentVariable("VALOR_MAXIMO"));
 
         private string _correlationId { get; set; }
 
-        public CaixaController(ISaqueService saqueService)
+        public SaquesController(ISaquesService saquesService)
         {
             _stopWatch = new Stopwatch();
-            _saqueService = saqueService ?? throw  new ArgumentNullException(nameof(saqueService));
+            _saquesService = saquesService ?? throw  new ArgumentNullException(nameof(saquesService));
         }
 
         /// <summary>
@@ -38,25 +38,25 @@ namespace Banco.Atlantico.API.Controllers
         /// <returns></returns>
         [HttpPost()]
         [Consumes("application/json")]
-        [SwaggerResponse(200, "sucesso!", typeof(SaqueViewModel))]
+        [SwaggerResponse(201, "sucesso!", typeof(SaqueViewModel))]
         [SwaggerResponse(204, "nada encontrado!")]
         [SwaggerResponse(400, "Parametros inválidos!")]
         [SwaggerResponse(500, "Erro interno!")]
-        public async Task<IActionResult> SaqueAsync(SaqueViewModel saqueViewModel)
+        public async Task<IActionResult> SaquesAsync(SaqueViewModel saqueViewModel)
         {
             _stopWatch.Start();
             _correlationId = Guid.NewGuid().ToString();
 
             try
             {
-                if (saqueViewModel.Valor <= VALORMINIMO ||  saqueViewModel.Valor > VALORMAXIMO)
+                if (saqueViewModel.Valor <= VALORMINIMO &&  saqueViewModel.Valor > VALORMAXIMO)
                 {
                     return StatusCode((int)HttpStatusCode.PreconditionFailed, $"O valor minimo e maximo para  saques são {VALORMINIMO} e {VALORMAXIMO}");
                 }
 
-                var result = await _saqueService.SaqueAsync(saqueViewModel, _correlationId);
+                var result = await _saquesService.SaqueAsync(saqueViewModel, _correlationId);
 
-                return Ok(result);
+                return Created("NIE",result);
             }
             catch (Exception)
             {
