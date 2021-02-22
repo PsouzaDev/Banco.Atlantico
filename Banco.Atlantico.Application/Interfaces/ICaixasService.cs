@@ -9,5 +9,6 @@ namespace Banco.Atlantico.Application.Interfaces
     public interface ICaixasService
     {
         Task<IEnumerable<CaixaViewModel>> CaixasAsync(string _correlationId);
+        Task<bool> CaixasStatusAsync(string idCaixa, string _correlationId);
     }
 }

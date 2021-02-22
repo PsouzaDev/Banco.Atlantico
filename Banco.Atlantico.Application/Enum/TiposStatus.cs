@@ -8,8 +8,8 @@ namespace Banco.Atlantico.Application.Enum
     public enum TiposStatus
     {
         [Description("ATIVO")]
-        ATIVO = 1,
+        ATIVO = 0,
         [Description("BLOQUEADO")]
-        BLOQUEADO = 2
+        BLOQUEADO = 1
     }
 }

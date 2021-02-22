@@ -35,13 +35,12 @@ namespace Banco.Atlantico.Domain.Models.Builder
         }
         public QuerySaquesBuilder Update()
         {
-            query.Sql.Append(@"UPDATE Caixa");
+            query.Sql.Append(@"UPDATE Caixa ");
             return this;
         }
         public QuerySaquesBuilder Sets(Caixa caixa)
         {
-            query.Sql.Append(@"SET Saldo = @Saldo, NotaDois = @NotaDois, NotaCinco = @NotaCinco,
-                             NotaDez = @NotaDez, NotaVinte = @NotaVinte, NotaCinquenta = @NotaCinquenta");
+            query.Sql.Append(@"SET Saldo = @Saldo, NotaDois = @NotaDois, NotaCinco = @NotaCinco, NotaDez = @NotaDez, NotaVinte = @NotaVinte, NotaCinquenta = @NotaCinquenta ");
 
             query.Parameters.Add("@Saldo", caixa.Saldo, DbType.Int64, ParameterDirection.Input);
             query.Parameters.Add("@NotaDois", caixa.Dois, DbType.Int32, ParameterDirection.Input);

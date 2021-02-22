@@ -22,18 +22,37 @@ namespace Banco.Atlantico.Infra.Repository
             _querySaqueBuilder = querySaqueBuilder ?? throw new ArgumentNullException(nameof(querySaqueBuilder));
         }
 
-        public async Task<IEnumerable<ReciboSaque>> SaqueAsync(Saque saqueDomain, Caixa caixa, string _correlationId)
+        public async Task<Caixa> SaqueAsync(Saque saqueDomain, Caixa caixa, string _correlationId)
         {
-            var Query = _querySaqueBuilder.Update().Sets(caixa).WheresUpdates(caixa).Builder();
-
-            using (var con = new SqlConnection(ConnectionString))
+            try
             {
-                var Recibo = await con.ExecuteAsync(sql: Query.Sql.ToString(),
-                                                                    param: Query.Parameters,
-                                                                    commandTimeout: 140,
-                                                                    commandType: CommandType.Text);
+                Caixa result = null;
+                var Query = _querySaqueBuilder.Update().Sets(caixa).WheresUpdates(caixa).Builder();
 
-                throw new NotImplementedException();
+                using (var con = new SqlConnection(ConnectionString))
+                {
+                    await con.OpenAsync();
+
+                    var rows = await con.ExecuteAsync(sql: Query.Sql.ToString(),
+                                                                        param: Query.Parameters,
+                                                                        commandTimeout: 140,
+                                                                        commandType: CommandType.Text);
+
+                    Query.Sql.Clear();
+
+                    if (rows > 0)
+                        result = caixa;
+
+                    //log
+
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                //log
+
+                throw;
             }
 
         }

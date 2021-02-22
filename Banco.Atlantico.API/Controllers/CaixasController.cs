@@ -50,15 +50,49 @@ namespace Banco.Atlantico.API.Controllers
             }
         }
 
-        [HttpGet("/{idFicha}")]
+        [HttpGet("/{idCaixa}")]
         [Consumes("application/json")]
         [SwaggerResponse(200, "sucesso!", typeof(CaixaViewModel))]
         [SwaggerResponse(204, "nada encontrado!")]
         [SwaggerResponse(400, "Parametros inválidos!")]
         [SwaggerResponse(500, "Erro interno!")]
-        public async Task<IActionResult> CaixasAsync([FromRoute]string Id)
+        public async Task<IActionResult> CaixasAsync([FromRoute] string Id)
         {
             throw new NotImplementedException();
+        }
+
+        [HttpPatch("/BancoAtlantico/Status/{idCaixa}")]
+        [Consumes("application/json")]
+        [SwaggerResponse(200, "sucesso!", typeof(CaixaViewModel))]
+        [SwaggerResponse(204, "nada encontrado!")]
+        [SwaggerResponse(400, "Parametros inválidos!")]
+        [SwaggerResponse(500, "Erro interno!")]
+        public async Task<IActionResult> CaixasStatusAsync([FromRoute] string idCaixa)
+        {
+            _stopWatch.Start();
+            _correlationId = Guid.NewGuid().ToString();
+
+            try
+            {
+                var result = await _caixaService.CaixasStatusAsync(idCaixa, _correlationId);
+
+                if (result)
+                    return Ok(result);
+                else
+                {
+                    //log
+
+                    return BadRequest("Alteração de status invalida");
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                //log
+                throw;
+            }
         }
     }
 }

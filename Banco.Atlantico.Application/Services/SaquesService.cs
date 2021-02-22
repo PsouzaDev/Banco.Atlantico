@@ -1,5 +1,6 @@
 ﻿using App.Application.Utils;
 using AutoMapper;
+using Banco.Atlantico.Application.Enum;
 using Banco.Atlantico.Application.Interfaces;
 using Banco.Atlantico.Application.ViewModels;
 using Banco.Atlantico.Domain.Models;
@@ -17,7 +18,7 @@ namespace Banco.Atlantico.Application.Services
         private readonly ICaixasRepository _caixasRepository;
         private readonly Criptografia _criptografia = new Criptografia();
 
-        public SaquesService(IMapper mapper,ISaquesRepository saquesRepository, ICaixasRepository caixasRepository)
+        public SaquesService(IMapper mapper, ISaquesRepository saquesRepository, ICaixasRepository caixasRepository)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _saquesRepository = saquesRepository ?? throw new ArgumentNullException(nameof(saquesRepository));
@@ -25,14 +26,15 @@ namespace Banco.Atlantico.Application.Services
         }
 
 
-        public async Task<IEnumerable<ReciboSaqueViewModel>> SaqueAsync(SaqueViewModel saqueViewModel, string _correlationId)
+        public async Task<CaixaViewModel> SaqueAsync(SaqueViewModel saqueViewModel, string _correlationId)
         {
+            CaixaViewModel result = null;
+
             var saqueDomain = _mapper.Map<SaqueViewModel, Saque>(saqueViewModel);
 
-            saqueDomain.IdCaixa = await _criptografia.DecryptString(saqueDomain.IdCaixa);
             saqueDomain.ClienteId = await _criptografia.DecryptString(saqueDomain.ClienteId);
 
-            var caixa = await _caixasRepository.CaixasAsync(saqueDomain.IdCaixa,_correlationId);
+            var caixa = await _caixasRepository.CaixasAsync(saqueDomain.IdCaixa, _correlationId);
 
             var CaixaIsValid = ValidarCaixa(caixa, saqueDomain);
 
@@ -40,9 +42,13 @@ namespace Banco.Atlantico.Application.Services
 
             //var saldoIsValid = ValidarSaldo(saqueDomain);
 
-            var reciboSaque = await _saquesRepository.SaqueAsync(saqueDomain, caixa, _correlationId);
+            if (CaixaIsValid && notasIsValid)
+            {
+                var caixaComSaque = await _saquesRepository.SaqueAsync(saqueDomain, caixa, _correlationId);
+                result = _mapper.Map<Caixa, CaixaViewModel>(caixaComSaque);
+            }
 
-            var result = _mapper.Map<IEnumerable<ReciboSaque>, IEnumerable<ReciboSaqueViewModel>>(reciboSaque);
+
             return result;
 
         }
@@ -54,18 +60,20 @@ namespace Banco.Atlantico.Application.Services
 
         private bool ValidarNotas(decimal valor, ref Caixa caixa)
         {
-            bool result = false;
+            var result = false;
 
             if (valor % 50 == 0)
             {
                 caixa.Saldo -= (long)valor;
                 caixa.Cinquenta -= (int)(valor / 50);
+                result = true;
             }
-            else if( valor % 50 > 0 && (valor % 50) % 20 == 0)
+            else if (valor % 50 > 0 && (valor % 50) % 20 == 0)
             {
                 caixa.Saldo -= (long)valor;
                 caixa.Cinquenta -= (int)(valor / 50);
                 caixa.Vinte -= (int)((valor % 50) / 20);
+                result = true;
             }
             else if ((valor % 50) % 20 > 0 && ((valor % 50) % 20) % 10 == 0)
             {
@@ -73,6 +81,7 @@ namespace Banco.Atlantico.Application.Services
                 caixa.Cinquenta = caixa.Cinquenta - (int)(valor / 50);
                 caixa.Vinte = caixa.Vinte - (int)((valor % 50) / 20);
                 caixa.Dez = caixa.Dez - (int)(((valor % 50) % 20) / 10);
+                result = true;
             }
             else if (((valor % 50) % 20) % 10 > 0 && (((valor % 50) % 20) % 10) % 5 == 0)
             {
@@ -81,6 +90,7 @@ namespace Banco.Atlantico.Application.Services
                 caixa.Vinte = caixa.Vinte - (int)((valor % 50) / 20);
                 caixa.Dez = caixa.Dez - (int)(((valor % 50) % 20) / 10);
                 caixa.Cinco = caixa.Cinco - (int)((((valor % 50) % 20) % 10) / 5);
+                result = true;
             }
             else if ((((valor % 50) % 20) % 10) % 5 > 0 && ((((valor % 50) % 20) % 10) % 5) % 2 == 0)
             {
@@ -90,18 +100,23 @@ namespace Banco.Atlantico.Application.Services
                 caixa.Dez -= (int)(((valor % 50) % 20) / 10);
                 caixa.Cinco -= (int)((((valor % 50) % 20) % 10) / 5);
                 caixa.Dois -= (int)(((((valor % 50) % 20) % 10) % 5) / 2);
+                result = true;
             }
             else
             {
+                //log
+
                 result = false;
             }
+
+            //log
 
             return result;
         }
 
-        private bool ValidarCaixa(Caixa caixa,Saque saqueDomain)
+        private bool ValidarCaixa(Caixa caixa, Saque saqueDomain)
         {
-            var result = (caixa.Status == Domain.TiposStatus.ATIVO && caixa.Saldo > saqueDomain.Valor) ? true : false;
+            var result = (caixa.Status == (int)TiposStatus.ATIVO && caixa.Saldo > saqueDomain.Valor) ? true : false;
 
             return result;
         }

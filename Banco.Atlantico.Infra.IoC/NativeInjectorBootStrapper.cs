@@ -20,7 +20,7 @@ namespace Banco.Atlantico.Infra.IoC
             //===================== Services ============================
             //###########################################################
             services.AddScoped<ISaquesService, SaquesService>();
-            services.AddScoped<ICaixasService, CaixasService>();
+            services.AddTransient<ICaixasService, CaixasService>();
 
             services.AddTransient<IQueryBuilder, QueryBuilder>();
             services.AddTransient<IQuerySaquesBuilder, QuerySaquesBuilder>();

@@ -10,6 +10,8 @@ namespace Banco.Atlantico.Application.ViewModels
     {
         [JsonProperty("Id")]
         public string Id { get; set; }
+        [JsonProperty("Status")]
+        public bool Status { get; set; }
         [JsonProperty("Saldo")]
         public long Saldo { get; set; }
         [JsonProperty("Notas de Dois Reais")]

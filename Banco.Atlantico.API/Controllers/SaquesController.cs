@@ -1,8 +1,10 @@
 ﻿using Banco.Atlantico.Application;
+using Banco.Atlantico.Application.Interfaces;
 using Banco.Atlantico.Application.Services;
 using Banco.Atlantico.Application.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
@@ -20,15 +22,17 @@ namespace Banco.Atlantico.API.Controllers
     {
         private readonly Stopwatch _stopWatch;
         private readonly ISaquesService _saquesService;
-        private readonly int VALORMINIMO = int.Parse( Environment.GetEnvironmentVariable("VALOR_MINIMO"));
-        private readonly int VALORMAXIMO = int.Parse( Environment.GetEnvironmentVariable("VALOR_MAXIMO"));
+        private readonly IHubContext<CaixaHub> _caixaHub;
+        private readonly int VALORMINIMO = int.Parse(Environment.GetEnvironmentVariable("VALOR_MINIMO"));
+        private readonly int VALORMAXIMO = int.Parse(Environment.GetEnvironmentVariable("VALOR_MAXIMO"));
 
         private string _correlationId { get; set; }
 
-        public SaquesController(ISaquesService saquesService)
+        public SaquesController(ISaquesService saquesService, IHubContext<CaixaHub> caixaHub, ICaixasService caixasService)
         {
             _stopWatch = new Stopwatch();
-            _saquesService = saquesService ?? throw  new ArgumentNullException(nameof(saquesService));
+            _saquesService = saquesService ?? throw new ArgumentNullException(nameof(saquesService));
+            _caixaHub = caixaHub;
         }
 
         /// <summary>
@@ -49,21 +53,37 @@ namespace Banco.Atlantico.API.Controllers
 
             try
             {
-                if (saqueViewModel.Valor <= VALORMINIMO &&  saqueViewModel.Valor > VALORMAXIMO)
+                if (saqueViewModel.Valor <= VALORMINIMO || saqueViewModel.Valor > VALORMAXIMO)
                 {
+                    //log
+
                     return StatusCode((int)HttpStatusCode.PreconditionFailed, $"O valor minimo e maximo para  saques são {VALORMINIMO} e {VALORMAXIMO}");
                 }
 
-                var result = await _saquesService.SaqueAsync(saqueViewModel, _correlationId);
+                var caixa = await _saquesService.SaqueAsync(saqueViewModel, _correlationId);
 
-                return Created("NIE",result);
+                if (caixa != null)
+                {
+                    await _caixaHub.Clients.All.SendAsync("atualizacaoCaixa", caixa);
+
+                    //log
+                    
+                    return Ok("Saque Efetuado com Sucesso");
+                }
+                else
+                {
+                    //log
+
+                    return BadRequest("Saque invalido");
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                //log
 
                 throw;
             }
         }
-        
+
     }
 }

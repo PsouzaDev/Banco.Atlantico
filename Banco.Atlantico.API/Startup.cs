@@ -1,4 +1,5 @@
 using Banco.Atlantico.API.Configurations;
+using Banco.Atlantico.API.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,17 @@ namespace Banco.Atlantico.API
 
             services.AddAutoMapperSetup();
 
+            services.AddSignalR();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+            });
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Banco Atlantico API", Version = "v1" });
@@ -46,13 +58,16 @@ namespace Banco.Atlantico.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseWebSockets(new WebSocketOptions
+            {
+                KeepAliveInterval = TimeSpan.FromSeconds(120),
+            });
+
+          
             app.UseHttpsRedirection();
 
             // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            app.UseCors("CorsPolicy");
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -69,9 +84,11 @@ namespace Banco.Atlantico.API
 
             app.UseAuthorization();
 
+            // Than register your hubs here with a url.
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<CaixaHub>("/hub/caixa");
             });
         }
     }

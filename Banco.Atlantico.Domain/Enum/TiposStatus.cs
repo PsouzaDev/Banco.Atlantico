@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace Banco.Atlantico.Domain
+namespace Banco.Atlantico.Domain.Enum
 {
     public enum TiposStatus
     {
         [Description("ATIVO")]
-        ATIVO = 1,
+        ATIVO = 0,
         [Description("BLOQUEADO")]
-        BLOQUEADO = 2
+        BLOQUEADO = 1
     }
 }

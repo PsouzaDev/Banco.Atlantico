@@ -9,6 +9,6 @@ namespace Banco.Atlantico.Application
 {
     public interface ISaquesService
     {
-        Task<IEnumerable< ReciboSaqueViewModel>> SaqueAsync(SaqueViewModel saqueViewModel, string _correlationId);
+        Task<CaixaViewModel> SaqueAsync(SaqueViewModel saqueViewModel, string _correlationId);
     }
 }

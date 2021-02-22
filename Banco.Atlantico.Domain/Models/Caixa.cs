@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Banco.Atlantico.Domain.Enum;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

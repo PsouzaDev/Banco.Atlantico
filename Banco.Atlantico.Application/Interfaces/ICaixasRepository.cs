@@ -1,4 +1,6 @@
-﻿using Banco.Atlantico.Domain.Models;
+﻿using Banco.Atlantico.Domain;
+using Banco.Atlantico.Domain.Enum;
+using Banco.Atlantico.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +12,6 @@ namespace Banco.Atlantico.Application.Interfaces
     {
         Task<IEnumerable<Caixa>> CaixasAsync(string _correlationId);
         Task<Caixa> CaixasAsync(string idCaixa,string _correlationId);
+        Task<bool> CaixasStatusAsync(string idCaixa, TiposStatus status, string correlationId);
     }
 }
