@@ -1,17 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Banco.Atlantico.Application\Banco.Atlantico.Application.csproj" />
-    <ProjectReference Include="..\Banco.Atlantico.Infra\Banco.Atlantico.Infra.csproj" />
+    <ProjectReference Include="..\Banco.Atlantico.Domain\Banco.Atlantico.Domain.csproj" />
   </ItemGroup>
 
 </Project>

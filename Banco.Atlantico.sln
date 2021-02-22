@@ -17,11 +17,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Shared", "6 - Shared", "{93F1BF94-420D-4326-BFC1-50A7444CDE53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banco.Atlantico.API", "Banco.Atlantico.API\Banco.Atlantico.API.csproj", "{4A37DD95-6D00-4754-8293-207E7B548744}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banco.Atlantico.API", "Banco.Atlantico.API\Banco.Atlantico.API.csproj", "{4A37DD95-6D00-4754-8293-207E7B548744}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banco.Atlantico.Application", "Banco.Atlantico.Application\Banco.Atlantico.Application.csproj", "{EC78249B-1D7E-479F-96E3-8017A81187F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banco.Atlantico.Application", "Banco.Atlantico.Application\Banco.Atlantico.Application.csproj", "{EC78249B-1D7E-479F-96E3-8017A81187F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banco.Atlantico.Infra.IoC", "Banco.Atlantico.Infra.IoC\Banco.Atlantico.Infra.IoC.csproj", "{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banco.Atlantico.Infra.IoC", "Banco.Atlantico.Infra.IoC\Banco.Atlantico.Infra.IoC.csproj", "{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banco.Atlantico.Domain", "Banco.Atlantico.Domain\Banco.Atlantico.Domain.csproj", "{3E3C08CB-A5C8-491F-B5E8-108E1121BE44}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banco.Atlantico.Infra", "Banco.Atlantico.Infra\Banco.Atlantico.Infra.csproj", "{DDC95EC4-A5CC-450B-A300-39A589BD78E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banco.Atlantico.Teste", "Banco.Atlantico.Teste\Banco.Atlantico.Teste.csproj", "{8A8D93BC-1568-4C51-82F7-802C43C3E751}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +47,18 @@ Global
 		{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3C08CB-A5C8-491F-B5E8-108E1121BE44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3C08CB-A5C8-491F-B5E8-108E1121BE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3C08CB-A5C8-491F-B5E8-108E1121BE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3C08CB-A5C8-491F-B5E8-108E1121BE44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC95EC4-A5CC-450B-A300-39A589BD78E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC95EC4-A5CC-450B-A300-39A589BD78E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC95EC4-A5CC-450B-A300-39A589BD78E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC95EC4-A5CC-450B-A300-39A589BD78E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8D93BC-1568-4C51-82F7-802C43C3E751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8D93BC-1568-4C51-82F7-802C43C3E751}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8D93BC-1568-4C51-82F7-802C43C3E751}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8D93BC-1568-4C51-82F7-802C43C3E751}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +73,9 @@ Global
 		{4A37DD95-6D00-4754-8293-207E7B548744} = {73A4801A-A2A4-4802-9C08-57C9E8006C05}
 		{EC78249B-1D7E-479F-96E3-8017A81187F5} = {CCA595FD-81D1-4681-966D-96F46999AC34}
 		{521A5D65-E780-4BD2-85F9-3E83D7E8EB8A} = {7855B075-E4FB-42CF-A185-D07922A417EB}
+		{3E3C08CB-A5C8-491F-B5E8-108E1121BE44} = {28C6CA54-3743-438D-A088-31CABD027CB7}
+		{DDC95EC4-A5CC-450B-A300-39A589BD78E0} = {7855B075-E4FB-42CF-A185-D07922A417EB}
+		{8A8D93BC-1568-4C51-82F7-802C43C3E751} = {DC74F2DD-B7E8-4078-A425-F1BB59146A52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0ACF0303-704D-465D-A493-1ECE9306D85C}
