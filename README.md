@@ -1,7 +1,6 @@
 # Banco.Atlantico
 
-Está é uma aplicação prova de conceito, para o processo seletivo do instituto atlantico.
-
+Está é uma aplicação prova de conceito, para o processo seletivo do Instituto Atlântico.
 
 ## Pré-requisitos
 
