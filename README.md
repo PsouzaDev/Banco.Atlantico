@@ -20,8 +20,3 @@ execute os comandos:
 dotnet build
 dotnet run --project ..\Banco.Atlantico\Banco.Atlantico.API
 ```
-
-## Requirements 
-
-[Node.js](https://nodejs.org/en/) is required.
-
