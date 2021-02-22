@@ -26,17 +26,16 @@ namespace Banco.Atlantico.Teste.ControllerTest
             _saquesController = _mocker.CreateInstance<SaquesController>();
 
         }
-
-
-        [Fact(DisplayName = "Saque Async - 200")]
-        [Trait("Categoria", "Controller - Consultar Caixas - 200")]
-        public async Task Saque_Async_Sucesso_200()
+        
+        [Fact(DisplayName = "Saque Async - 400")]
+        [Trait("Categoria", "Controller - Consultar Caixas - 400")]
+        public async Task Saque_Async_BadRequest_400()
         {
             // Arrange
             var _correlationId = Guid.NewGuid().ToString();
             var saque = new SaqueViewModel();
             saque.ClienteId = "2v/Y2GtNHhwtnoTVa4lyAcDyT+IyEAbOLyMDXjRVYbA=";
-            saque.IdCaixa = "2v/Y2GtNHhwtnoTVa4lyAcDyT+IyEAbOLyMDXjRVYbA=";
+            saque.IdCaixa = "1";
             saque.Valor = 80;
 
             _mocker.GetMock<ISaquesService>()
@@ -48,11 +47,11 @@ namespace Banco.Atlantico.Teste.ControllerTest
 
             // Assert
             Assert.NotNull(resultStatus);
-            Assert.Equal(200, resultStatus.StatusCode);
+            Assert.Equal(400, resultStatus.StatusCode);
         }
 
-        [Fact(DisplayName = "Caixas Async - 400")]
-        [Trait("Categoria", "Controller - Saque - 400")]
+        [Fact(DisplayName = "Caixas Async - 412")]
+        [Trait("Categoria", "Controller - Saque - 412")]
         public async Task Saque_Async_PreconditionFailed_412()
         {
             // Arrange
